@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-around mb-3 p-3">
+        <div class="col-sm-5">
+            <div class="row mb-5">
+            </div>
+            <div class="row">
+                <h2>Roshan Shrestha</h2>
+            </div>
+            <div class="row">
+                <h6><span>&#8220;</span>Hi, I am Roshan. I would love to connect to world with the help of programming.
+                    <span>&#8220;</span></h6>
+            </div>
+            <div class="row">
+                <h4>Bio</h4>
+            </div>
+            <div class="row">
+                <p class="date-read">I went university of Pokhara, graduated with a degree of computer science.
+                    I am an enthusiast, highly passionated ever learning, goal focused person.</p>
+            </div>
+            <div class="row">
+                <img width="15px" height="15px" class="mr-2 mt-1" src="{% static 'images/gmail.png' %}">
+                <p>rocklifebehappy@gmail.com</p>
+            </div>
+            <div class="row">
+                <img width="15px" height="15px" class="mr-2 mt-1" src="{% static 'images/location.png' %}">
+                <p>Tanahun Nepal</p>
+            </div>
+            <div class="row">
+                <p class="mr-3">Editor:</p>
+                {% if request.user.profile.editor %}
+                <img width="15px" height="15px" class="mr-2 mt-1" src="{% static 'images/tick.png' %}">
+                {% else %}
+                <img width="15px" height="15px" class="mr-2 mt-1" src="{% static 'images/wrong.png' %}">
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-sm-3 mt-5 p-3">
+            <img height="250px" src="{{posts.2.thumbnail.url}}" class="rounded circle">
+        </div>
+    </div>
+    <div class="row justify-content-around border-top p-3">
+        {% for post in posts %}
+        <div class="col-md-8">
+            <div class="post-entry-2 d-flex">
+                <div class="thumbnail order-md-2 rounded" style="background-image: url({{post.thumbnail.url}})"></div>
+                <div class="contents order-md-1 pl-0">
+                    <span class="caption mb-4 d-block">{{post.auther.user.username}}</span>
+                    <h2><a href="">{{post.title}}</a></h2>
+                    <p class="mb-3">{{post.overview}}</p>
+                    <div class="post-meta">
+                  <span class="d-block">
+                    {% for cat in post.categories.all %}
+                      <a href="#">{{cat.title}}</a>,
+                    {% endfor %}
+                  </span>
+                        <span class="date-read">{{post.time_upload}} <span class="mx-1">&bullet;</span> {{post.read}} reads <span
+                                class="icon-star2"></span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

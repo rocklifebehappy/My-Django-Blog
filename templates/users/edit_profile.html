@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="p-4 p-md-5 mb-4 row justify-content-center">
+        <div class="col-md-6 p-3 ">
+            <form method="post" enctype="multipart/form-data">{% csrf_token %}
+                <fieldset>
+                    <label class="font-weight-bold">Edit your profile below</label>
+                    {{ u_form|crispy }}
+                    {{ p_form|crispy }}
+                </fieldset>
+                <button type="submit" name="Submit" class="btn btn-secondary mt-2">Submit</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
